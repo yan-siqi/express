@@ -1,17 +1,13 @@
 let path=require('path');//引入路径
 let express = require("express");
 const { response, request } = require("express");
-//定义局部中间件
-let multipart = require('connect-multiparty');
-let multipartMiddleware = multipart();
 //.1.生成应用实例
 const app = new express(); //app:代表整个应用
-//全局中间键
+//中间键
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname,'public')));//使用目录
-//局部中间件:
-app.post("/register", multipartMiddleware,(request, response) => {
+app.post("/register", (request, response) => {
   console.log(request.body);
   response.send("服务器返回的数据");
 });
